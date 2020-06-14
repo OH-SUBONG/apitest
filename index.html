@@ -7,51 +7,68 @@ author_profile: true
 <head>
 	<meta charset="utf-8"/>
 	<title>Kakao 지도 시작하기</title>
-	<style>
-.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
-.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-</style>
 </head>
 <body>
-	<div id="map" style="width:1200px;height:800px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3ee406a213eb13cf68f16663115f71c&libraries=services,clusterer,drawing"></script>
+	<div id="map" style="width:800px;height:600px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3ee406a213eb13cf68f16663115f71c"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
-			center: new kakao.maps.LatLng(33.467074, 126.544706),
-			level: 10
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 9
 		};
 
 		var map = new kakao.maps.Map(container, options);
-		var markerPosition  = new kakao.maps.LatLng(33.467074, 126.544706); 
+        var positions = [
+    {
+        title: '제주대학교병원', 
+        latlng: new kakao.maps.LatLng(33.467074, 126.5447058)
+    },
+    {
+        title: '서귀포의료원', 
+        latlng: new kakao.maps.LatLng(33.255272, 126.5637258)
+    },
+    {
+        title: '열린병원', 
+        latlng: new kakao.maps.LatLng(33.254405292986085 , 126.56542889456588)
+    },
+    {
+        title: '한라병원',
+        latlng: new kakao.maps.LatLng(33.48992297582224, 126.4849936326045)
+    }
+    {
+        title: '한마음병원', 
+        latlng: new kakao.maps.LatLng(33.4962819253554 , 126.54623472325575)
+    },
+                {
+        title: '한국병원', 
+        latlng: new kakao.maps.LatLng(33.50017674983848 , 126.5170022258263 )
+    },
+                {
+        title: '중앙병원', 
+        latlng: new kakao.maps.LatLng(33.492323172340356 , 126.47048499631488 )
+    }
+];
 
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-var content = '<div class="customoverlay">' +
-    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-    '    <span class="title">제주대학교병원</span>' +
-    '  </a>' +
-    '</div>';
-
-// 커스텀 오버레이가 표시될 위치입니다 
-var position = new kakao.maps.LatLng(33.467074, 126.544700);  
-
-// 커스텀 오버레이를 생성합니다
-var customOverlay = new kakao.maps.CustomOverlay({
-    map: map,
-    position: position,
-    content: content,
-    yAnchor: 1 
-});
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
 	</script>
 </body>
 </html>
