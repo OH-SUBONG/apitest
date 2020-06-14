@@ -16,13 +16,13 @@ author_profile: true
 </style>
 </head>
 <body>
-	<div id="map" style="width:1000px;height:600px;"></div>
+	<div id="map" style="width:1200px;height:800px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e3ee406a213eb13cf68f16663115f71c&libraries=services,clusterer,drawing"></script>
 	<script>
 		var container = document.getElementById('map');
 		var options = {
 			center: new kakao.maps.LatLng(33.467074, 126.544706),
-			level: 11
+			level: 13
 		};
 
 		var map = new kakao.maps.Map(container, options);
@@ -43,7 +43,7 @@ var content = '<div class="customoverlay">' +
     '</div>';
 
 // 커스텀 오버레이가 표시될 위치입니다 
-var position = new kakao.maps.LatLng(33.467074, 126.544706);  
+var position = new kakao.maps.LatLng(33.467074, 126.544700);  
 
 // 커스텀 오버레이를 생성합니다
 var customOverlay = new kakao.maps.CustomOverlay({
